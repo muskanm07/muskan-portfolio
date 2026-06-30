@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react'
+import profileImg from '../../public/profile.png'
 
 const socials = [
   { icon: Github, href: 'https://github.com/muskanm07', label: 'GitHub' },
@@ -20,19 +21,16 @@ export default function Hero() {
 
   useEffect(() => {
     let timer
-
     const tick = () => {
       if (!typeRef.current) return
       const s = stateRef.current
       const current = phrases[s.phraseIndex]
-
       if (s.pausing) {
         s.pausing = false
         s.deleting = true
         timer = setTimeout(tick, 60)
         return
       }
-
       if (!s.deleting) {
         s.charIndex += 1
         typeRef.current.textContent = current.slice(0, s.charIndex)
@@ -54,7 +52,6 @@ export default function Hero() {
         }
       }
     }
-
     timer = setTimeout(tick, 800)
     return () => clearTimeout(timer)
   }, [])
@@ -62,206 +59,138 @@ export default function Hero() {
   return (
     <section
       id="about"
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '100px 24px 64px',
-        maxWidth: '1100px',
-        margin: '0 auto',
-        position: 'relative',
-      }}
+      className="min-h-screen flex flex-col justify-center px-4 sm:px-6 pt-[100px] pb-16 max-w-[1100px] mx-auto relative"
     >
       {/* Ambient glow blob */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '120px',
-          right: '-80px',
-          width: '400px',
-          height: '400px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(167,139,250,0.18), rgba(232,197,71,0.08))',
-          filter: 'blur(60px)',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
+      <div className="absolute top-[120px] -right-20 w-[400px] h-[400px] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.18), rgba(232,197,71,0.08))', filter: 'blur(60px)' }}
       />
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      {/* Two column layout */}
+      <div className="relative z-10 flex items-center gap-10 sm:gap-14 lg:gap-[60px] flex-wrap">
 
-        {/* Available badge */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '32px' }}>
-          <span style={{ position: 'relative', display: 'inline-flex', width: '10px', height: '10px' }}>
-            <span
+        {/* LEFT - all original content */}
+        <div className="flex-1 min-w-0 basis-[300px]">
+
+          {/* Available badge */}
+          <div className="flex items-center gap-2 mb-8">
+            <span className="relative inline-flex w-2.5 h-2.5">
+              <span className="absolute inset-0 rounded-full bg-[var(--green)] opacity-75 animate-ping" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--green)] inline-block" />
+            </span>
+            <span className="text-[var(--green)] text-xs font-semibold tracking-[0.08em] uppercase">
+              Open to work &amp; freelance projects
+            </span>
+          </div>
+
+          {/* Main headline */}
+          <h1 className="leading-[1.1] mb-4">
+            <span className="block text-[clamp(34px,8vw,76px)] font-black tracking-[-0.03em] text-[var(--text)]">
+              Hi, I&apos;m{' '}
+              <span
+                className="serif italic"
+                style={{
+                  background: 'linear-gradient(135deg, #e8c547 0%, #a78bfa 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Muskan.
+              </span>
+            </span>
+            <span className="block text-[clamp(24px,5vw,52px)] font-bold tracking-[-0.02em] text-[var(--muted)] mt-2">
+              Frontend Developer
+            </span>
+          </h1>
+
+          {/* Typewriter */}
+          <div className="flex items-center gap-2 mb-7 h-9">
+            <Sparkles size={16} className="text-[var(--accent)] flex-shrink-0" />
+            <p className="text-lg font-medium text-[var(--accent)]">
+              <span ref={typeRef} />
+              <span className="animate-pulse">|</span>
+            </p>
+          </div>
+
+          {/* Human story */}
+          <p className="text-base leading-[1.8] text-[var(--muted)] max-w-[620px] mb-10">
+            Fresh BCA grad (2026) with a builder&apos;s mindset — I don&apos;t just write code,
+            I care about{' '}
+            <span className="text-[var(--text)] font-semibold">whether it actually works for people.</span>
+            {' '}My goal isn&apos;t just a job — it&apos;s real experience building real things, so one day I can build my own.
+            Right now, I&apos;m your{' '}
+            <span className="text-[var(--accent)] font-semibold">most motivated hire or collaborator</span>
+            {' '}— I have everything to prove and nothing to phone in.
+          </p>
+
+          {/* CTA buttons */}
+          <div className="flex flex-wrap gap-4 mb-12">
+            <a
+              href="#projects"
+              className="bg-[var(--accent)] text-[var(--bg)] px-7 py-3 rounded-full font-bold text-sm no-underline transition-transform duration-200 hover:scale-105"
+              style={{ boxShadow: '0 0 32px rgba(232,197,71,0.25)' }}
+            >
+              See My Work
+            </a>
+            <a
+              href="#contact"
+              className="bg-transparent text-[var(--text)] px-7 py-3 rounded-full font-semibold text-sm no-underline border border-[var(--border)] transition-colors duration-200 hover:border-[var(--accent2)] hover:text-[var(--accent2)]"
+            >
+              Let&apos;s Talk
+            </a>
+          </div>
+
+          {/* Social links */}
+          <div className="flex items-center gap-6">
+            {socials.map(({ icon: Icon, href, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1.5 text-[var(--muted)] text-[13px] font-medium no-underline transition-colors duration-200 hover:text-[var(--accent)]"
+              >
+                <Icon size={15} />
+                {label}
+              </a>
+            ))}
+          </div>
+
+        </div>
+
+        {/* RIGHT - profile image */}
+        <div className="hidden lg:block">
+          <div className="relative w-[320px] h-[320px]">
+            <div
+              className="absolute -inset-5 rounded-full z-0"
+              style={{ background: 'radial-gradient(circle, rgba(232,197,71,0.15), rgba(167,139,250,0.08), transparent 70%)', filter: 'blur(20px)' }}
+            />
+            <div
+              className="absolute -inset-0.5 rounded-full z-10"
+              style={{ background: 'linear-gradient(135deg, #e8c547 0%, #a78bfa 60%, transparent 100%)' }}
+            />
+            <img
+              src={profileImg}
+              alt="Muskan Maura — Frontend Developer"
+              className="absolute rounded-full object-cover z-20 border-[3px] border-[var(--bg)]"
               style={{
-                position: 'absolute',
-                inset: 0,
-                borderRadius: '50%',
-                background: 'var(--green)',
-                opacity: 0.75,
-                animation: 'ping 1.5s ease-in-out infinite',
+                inset: '3px',
+                width: 'calc(100% - 6px)',
+                height: 'calc(100% - 10px)',
+                objectPosition: 'center',
               }}
             />
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--green)', display: 'inline-block' }} />
-          </span>
-          <span style={{ color: 'var(--green)', fontSize: '12px', fontWeight: '600', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            Open to work &amp; freelance projects
-          </span>
+          </div>
         </div>
 
-        {/* Main headline */}
-        <h1 style={{ lineHeight: 1.1, marginBottom: '16px' }}>
-          <span style={{ display: 'block', fontSize: 'clamp(40px, 8vw, 76px)', fontWeight: '900', letterSpacing: '-0.03em', color: 'var(--text)' }}>
-            Hi, I&apos;m{' '}
-            <span
-              className="serif"
-              style={{
-                fontStyle: 'italic',
-                background: 'linear-gradient(135deg, #e8c547 0%, #a78bfa 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Muskan.
-            </span>
-          </span>
-          <span
-            style={{
-              display: 'block',
-              fontSize: 'clamp(28px, 5vw, 52px)',
-              fontWeight: '700',
-              letterSpacing: '-0.02em',
-              color: 'var(--muted)',
-              marginTop: '8px',
-            }}
-          >
-            Frontend Developer
-          </span>
-        </h1>
-
-        {/* Typewriter line */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '28px', height: '36px' }}>
-          <Sparkles size={16} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-          <p style={{ fontSize: '18px', fontWeight: '500', color: 'var(--accent)' }}>
-            <span ref={typeRef} />
-            <span style={{ animation: 'blink 1s step-end infinite' }}>|</span>
-          </p>
-        </div>
-
-        {/* Human story */}
-        <p
-          style={{
-            fontSize: '16px',
-            lineHeight: '1.8',
-            color: 'var(--muted)',
-            maxWidth: '620px',
-            marginBottom: '40px',
-          }}
-        >
-          Fresh BCA grad (2026) with a builder&apos;s mindset — I don&apos;t just write code,
-          I care about{' '}
-          <span style={{ color: 'var(--text)', fontWeight: '600' }}>whether it actually works for people.</span>
-          {' '}My goal isn&apos;t just a job — it&apos;s real experience building real things, so one day I can build my own.
-          Right now, I&apos;m your{' '}
-          <span style={{ color: 'var(--accent)', fontWeight: '600' }}>most motivated hire or collaborator</span>
-          {' '}— I have everything to prove and nothing to phone in.
-        </p>
-
-        {/* CTA buttons */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '48px' }}>
-          <a
-            href="#projects"
-            style={{
-              background: 'var(--accent)',
-              color: 'var(--bg)',
-              padding: '13px 28px',
-              borderRadius: '999px',
-              fontWeight: '700',
-              fontSize: '14px',
-              textDecoration: 'none',
-              transition: 'transform 0.2s, box-shadow 0.2s',
-              boxShadow: '0 0 32px rgba(232,197,71,0.25)',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.04)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)' }}
-          >
-            See My Work
-          </a>
-          <a
-            href="#contact"
-            style={{
-              background: 'transparent',
-              color: 'var(--text)',
-              padding: '13px 28px',
-              borderRadius: '999px',
-              fontWeight: '600',
-              fontSize: '14px',
-              textDecoration: 'none',
-              border: '1px solid var(--border)',
-              transition: 'border-color 0.2s, color 0.2s',
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent2)'; e.currentTarget.style.color = 'var(--accent2)' }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = 'var(--text)' }}
-          >
-            Let&apos;s Talk
-          </a>
-        </div>
-
-        {/* Social links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-          {socials.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--muted)', fontSize: '13px', fontWeight: '500', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted)' }}
-            >
-              <Icon size={15} />
-              {label}
-            </a>
-          ))}
-        </div>
       </div>
 
       {/* Scroll hint */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '32px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          opacity: 0.35,
-        }}
-      >
-        <span style={{ fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--muted)' }}>scroll</span>
-        <ArrowDown size={13} style={{ color: 'var(--muted)', animation: 'bounce 2s infinite' }} />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-35">
+        <span className="text-[10px] tracking-[0.15em] uppercase text-[var(--muted)]">scroll</span>
+        <ArrowDown size={13} className="text-[var(--muted)] animate-bounce" />
       </div>
-
-      <style>{`
-        @keyframes ping {
-          0% { transform: scale(1); opacity: 0.75; }
-          70% { transform: scale(2.2); opacity: 0; }
-          100% { transform: scale(2.2); opacity: 0; }
-        }
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(5px); }
-        }
-      `}</style>
     </section>
   )
 }

@@ -1,40 +1,59 @@
 import { ExternalLink, Github, ArrowRight } from 'lucide-react'
 
 const projects = [
-
-    {
-  number: '01',
-  title: 'Custom CRM Pipeline Prototype',
-  problem: 'Founders often struggle to manage leads because existing platforms are either too expensive or overly complex for early-stage teams.',
-  solution: 'I built a clean, high-speed CRM interface using React to model how lead-status tracking should look, focusing on intuitive UX for sales teams to manage their pipeline at a glance.',
-  impact: 'Created a modular UI framework for lead tracking · Designed for future-proof API integration · Reduced UI clutter for sales staff',
-  stack: ['React', 'Tailwind CSS', 'JavaScript', 'Vite'],
-  liveUrl: 'https://personal-brand-lp.netlify.app/',
-  githubUrl:'https://github.com/muskanm07/personal-brand-lp',
-  accent: '#3b82f6',
-  emoji: '📊',
-},
   {
-  number: '02',
-  title: 'Climora: Real-Time Data Visualization Dashboard',
-  problem: 'Users often struggle with clunky weather interfaces that are cluttered with ads and slow to update, making it hard to get actionable insights at a glance.',
-  solution: 'I built Climora as a high-performance weather dashboard that consumes real-time APIs to provide a clean, hyper-responsive 5-day forecast. Focused on extreme load speed and data readability.',
-  impact: 'Processed real-time API streams into an intuitive, card-based UI · Minimized latency for immediate data retrieval · Built for cross-device consistency',
-  stack: ['React', 'Tailwind CSS', 'OpenWeatherMap API', 'Fetch','Router'],
-  liveUrl: 'https://climora-by-muskan.netlify.app/',
-  githubUrl: 'https://github.com/muskanm07/climora-weather-app',
-  accent: '#3b82f6', 
-  emoji: '🌤️',
-},
- 
-    
+    number: '01',
+    title: 'Custom CRM Pipeline Prototype',
+    problem: 'Founders often struggle to manage leads because existing platforms are either too expensive or overly complex for early-stage teams.',
+    solution: 'I built a clean, high-speed CRM interface using React to model how lead-status tracking should look, focusing on intuitive UX for sales teams to manage their pipeline at a glance.',
+    impact: 'Created a modular UI framework for lead tracking · Designed for future-proof API integration · Reduced UI clutter for sales staff',
+    stack: ['React', 'Tailwind CSS', 'JavaScript', 'Vite'],
+    liveUrl: 'https://personal-brand-lp.netlify.app/',
+    githubUrl: 'https://github.com/muskanm07/personal-brand-lp',
+    accent: '#3b82f6',
+    emoji: '📊',
+  },
+  {
+    number: '02',
+    title: 'Climora: Real-Time Data Visualization Dashboard',
+    problem: 'Users often struggle with clunky weather interfaces that are cluttered with ads and slow to update, making it hard to get actionable insights at a glance.',
+    solution: 'I built Climora as a high-performance weather dashboard that consumes real-time APIs to provide a clean, hyper-responsive 5-day forecast. Focused on extreme load speed and data readability.',
+    impact: 'Processed real-time API streams into an intuitive, card-based UI · Minimized latency for immediate data retrieval · Built for cross-device consistency',
+    stack: ['React', 'Tailwind CSS', 'OpenWeatherMap API', 'Fetch', 'Router'],
+    liveUrl: 'https://climora-by-muskan.netlify.app/',
+    githubUrl: 'https://github.com/muskanm07/climora-weather-app',
+    accent: '#3b82f6',
+    emoji: '🌤️',
+  },
 ]
 
 export default function Projects() {
   return (
-    <section id="projects" style={{ background: 'var(--bg)', padding: '0' }}>
-      <div className="section-pad">
-
+    <section 
+      id="projects" 
+      style={{ 
+        background: 'var(--bg)', 
+        padding: '0',
+        width: '100vw',
+        position: 'relative',
+        left: '50%',
+        right: '50%',
+        marginLeft: '-50vw',
+        marginRight: '-50vw',
+        overflowX: 'hidden'
+      }}
+    >
+      <div 
+        className="section-pad"
+        style={{
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          paddingLeft: '20px',
+          paddingRight: '20px',
+          boxSizing: 'border-box'
+        }}
+      >
         {/* Header */}
         <div style={{ marginBottom: '64px' }}>
           <span
@@ -80,12 +99,12 @@ export default function Projects() {
         </div>
 
         {/* Project list */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%' }}>
           {projects.map((project) => (
             <div
               key={project.number}
-              className="card-base"
-              style={{ padding: '32px', position: 'relative', overflow: 'hidden' }}
+              className="card-base project-card"
+              style={{ padding: '32px', position: 'relative', overflow: 'hidden', boxSizing: 'border-box' }}
             >
               {/* Accent stripe */}
               <div
@@ -100,17 +119,10 @@ export default function Projects() {
                 }}
               />
 
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr auto',
-                  gap: '24px',
-                  alignItems: 'start',
-                }}
-              >
+              <div className="project-grid">
                 <div>
                   {/* Number + emoji + title */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
                     <span
                       style={{
                         fontSize: '11px',
@@ -118,29 +130,30 @@ export default function Projects() {
                         color: project.accent,
                         letterSpacing: '0.08em',
                         opacity: 0.7,
+                        marginTop: '4px',
                       }}
                     >
                       {project.number}
                     </span>
-                    <span style={{ fontSize: '22px' }}>{project.emoji}</span>
-                    <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'var(--text)', letterSpacing: '-0.01em' }}>
+                    <span style={{ fontSize: '20px', marginTop: '1px' }}>{project.emoji}</span>
+                    <h3 style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text)', letterSpacing: '-0.01em', lineHeight: 1.3, flex: '1 1 200px' }}>
                       {project.title}
                     </h3>
                   </div>
 
                   {/* Problem → Solution → Impact */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '24px' }}>
-                    <div style={{ display: 'flex', gap: '12px' }}>
-                      <span style={{ fontSize: '11px', fontWeight: '700', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.08em', minWidth: '68px', paddingTop: '1px' }}>Problem</span>
-                      <p style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: 1.65 }}>{project.problem}</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '24px' }}>
+                    <div className="project-row">
+                      <span style={{ fontSize: '11px', fontWeight: '700', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.08em', minWidth: '68px' }}>Problem</span>
+                      <p style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: 1.65, margin: 0 }}>{project.problem}</p>
                     </div>
-                    <div style={{ display: 'flex', gap: '12px' }}>
-                      <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--accent2)', textTransform: 'uppercase', letterSpacing: '0.08em', minWidth: '68px', paddingTop: '1px' }}>Built</span>
-                      <p style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: 1.65 }}>{project.solution}</p>
+                    <div className="project-row">
+                      <span style={{ fontSize: '11px', fontWeight: '700', color: 'var(--accent2)', textTransform: 'uppercase', letterSpacing: '0.08em', minWidth: '68px' }}>Built</span>
+                      <p style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: 1.65, margin: 0 }}>{project.solution}</p>
                     </div>
-                    <div style={{ display: 'flex', gap: '12px' }}>
-                      <span style={{ fontSize: '11px', fontWeight: '700', color: project.accent, textTransform: 'uppercase', letterSpacing: '0.08em', minWidth: '68px', paddingTop: '1px' }}>Impact</span>
-                      <p style={{ fontSize: '14px', color: 'var(--text)', fontWeight: '500', lineHeight: 1.65 }}>{project.impact}</p>
+                    <div className="project-row">
+                      <span style={{ fontSize: '11px', fontWeight: '700', color: project.accent, textTransform: 'uppercase', letterSpacing: '0.08em', minWidth: '68px' }}>Impact</span>
+                      <p style={{ fontSize: '14px', color: 'var(--text)', fontWeight: '500', lineHeight: 1.65, margin: 0 }}>{project.impact}</p>
                     </div>
                   </div>
 
@@ -166,7 +179,7 @@ export default function Projects() {
                 </div>
 
                 {/* Links */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', flexShrink: 0 }}>
+                <div className="project-links" style={{ display: 'flex', flexDirection: 'column', gap: '10px', flexShrink: 0 }}>
                   <a
                     href={project.liveUrl}
                     target="_blank"
@@ -174,6 +187,7 @@ export default function Projects() {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '6px',
                       fontSize: '12px',
                       fontWeight: '600',
@@ -192,6 +206,7 @@ export default function Projects() {
                     <ExternalLink size={13} />
                     Live
                   </a>
+
                   <a
                     href={project.githubUrl}
                     target="_blank"
@@ -199,6 +214,7 @@ export default function Projects() {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'center',
                       gap: '6px',
                       fontSize: '12px',
                       fontWeight: '600',
@@ -250,6 +266,35 @@ export default function Projects() {
           </a>
         </div>
       </div>
+
+      <style>{`
+        .project-grid {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 24px;
+          align-items: start;
+        }
+        .project-row {
+          display: flex;
+          gap: 12px;
+        }
+        @media (max-width: 640px) {
+          .project-card { padding: 24px 20px !important; }
+          .project-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          .project-row {
+            flex-direction: column;
+            gap: 4px;
+          }
+          .project-links {
+            flex-direction: row !important;
+            order: -1; /* Pushes live/code buttons to top of card content on mobile layout */
+          }
+          .project-links a { flex: 1; }
+        }
+      `}</style>
     </section>
   )
 }

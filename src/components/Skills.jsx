@@ -34,7 +34,7 @@ const skillGroups = [
 function SkillBar({ name, level, note, color }) {
   return (
     <div style={{ marginBottom: '20px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '6px', flexWrap: 'wrap', gap: '4px' }}>
         <div>
           <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text)' }}>{name}</span>
           <span style={{ fontSize: '12px', color: 'var(--muted)', marginLeft: '10px' }}>{note}</span>

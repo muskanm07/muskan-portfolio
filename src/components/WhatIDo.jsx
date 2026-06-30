@@ -1,5 +1,4 @@
 import { Zap, Paintbrush, TrendingUp, Code2 } from 'lucide-react'
-
 const values = [
   {
     icon: Paintbrush,
@@ -36,13 +35,14 @@ const values = [
 ]
 
 export default function WhatIDo() {
+
   return (
-    <section
+   <section
       id="work"
       style={{ background: 'var(--surface)', padding: '0' }}
     >
-      <div className="section-pad">
-
+      <div className="section-pad ">
+        
         {/* Section header */}
         <div style={{ marginBottom: '64px' }}>
           <span
@@ -55,9 +55,9 @@ export default function WhatIDo() {
               display: 'block',
               marginBottom: '12px',
             }}
-          >
             What I Actually Do
-          </span>
+          ></span>
+          
           <h2
             style={{
               fontSize: 'clamp(28px, 5vw, 48px)',
@@ -93,7 +93,12 @@ export default function WhatIDo() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '20px',
+            width: '100%',
+            boxSizing: 'border-box',
+            marginLeft:'0'
+        
           }}
+         
         >
           {values.map((item) => {
             const Icon = item.icon
@@ -101,7 +106,7 @@ export default function WhatIDo() {
               <div
                 key={item.title}
                 className="card-base"
-                style={{ padding: '28px' }}
+                style={{ padding: '28px', width: '100%', boxSizing: 'border-box' }}
               >
                 {/* Icon */}
                 <div

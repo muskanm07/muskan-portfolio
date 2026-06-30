@@ -19,73 +19,34 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  const navStyle = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 50,
-    transition: 'all 0.3s ease',
-    background: scrolled ? 'rgba(15,14,23,0.92)' : 'transparent',
-    backdropFilter: scrolled ? 'blur(12px)' : 'none',
-    borderBottom: scrolled ? '1px solid var(--border)' : 'none',
-  }
-
-  const innerStyle = {
-    maxWidth: '1100px',
-    margin: '0 auto',
-    padding: '16px 24px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  }
-
-  const logoCircle = {
-    width: '32px',
-    height: '32px',
-    borderRadius: '50%',
-    background: 'var(--accent)',
-    color: 'var(--bg)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '13px',
-    fontWeight: '700',
-    flexShrink: 0,
-  }
-
   return (
-    <nav style={navStyle}>
-      <div style={innerStyle}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled || open
+          ? 'bg-[rgba(15,14,23,0.95)] backdrop-blur-md border-b border-[var(--border)]'
+          : 'bg-transparent border-b border-transparent'
+      }`}
+    >
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 
         {/* Logo */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-          <span style={logoCircle}>M</span>
-          <span style={{ fontWeight: '600', letterSpacing: '-0.02em', color: 'var(--text)' }}>
+        <a href="#" className="flex items-center gap-2 no-underline">
+          <span className="w-8 h-8 rounded-full bg-[var(--accent)] text-[var(--bg)] flex items-center justify-center text-[13px] font-bold flex-shrink-0">
+            M
+          </span>
+          <span className="font-semibold tracking-[-0.02em] text-[var(--text)]">
             Muskan
-            <span style={{ color: 'var(--accent)' }}>.</span>
+            <span className="text-[var(--accent)]">.</span>
           </span>
         </a>
 
         {/* Desktop nav links */}
-        <ul
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '32px',
-            listStyle: 'none',
-            margin: 0,
-            padding: 0,
-          }}
-          className="hidden-mobile"
-        >
+        <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
           {links.map((link) => (
             <li key={link.label}>
               <a
                 href={link.href}
-                style={{ color: 'var(--muted)', fontSize: '14px', fontWeight: '500', textDecoration: 'none', transition: 'color 0.2s' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--accent)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted)' }}
+                className="text-[var(--muted)] text-sm font-medium no-underline transition-colors duration-200 hover:text-[var(--accent)]"
               >
                 {link.label}
               </a>
@@ -96,52 +57,29 @@ export default function Nav() {
         {/* Hire Me CTA — desktop */}
         <a
           href="#contact"
-          className="hidden-mobile"
-          style={{
-            background: 'var(--accent)',
-            color: 'var(--bg)',
-            padding: '8px 20px',
-            borderRadius: '999px',
-            fontSize: '13px',
-            fontWeight: '700',
-            textDecoration: 'none',
-            transition: 'opacity 0.2s',
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.8' }}
-          onMouseLeave={(e) => { e.currentTarget.style.opacity = '1' }}
+          className="hidden md:inline-block bg-[var(--accent)] text-[var(--bg)] px-5 py-2 rounded-full text-[13px] font-bold no-underline transition-opacity duration-200 hover:opacity-80"
         >
           Hire Me
         </a>
 
-        {/* Mobile hamburger */}
+        {/* Mobile hamburger menu trigger */}
         <button
           onClick={() => setOpen(!open)}
-          className="show-mobile"
-          style={{ background: 'none', border: 'none', color: 'var(--text)', cursor: 'pointer', padding: '4px' }}
-          aria-label="Toggle menu"
+          className="md:hidden flex items-center justify-center bg-transparent border-none text-[var(--text)] cursor-pointer p-1"
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile dropdown */}
+      {/* Mobile dropdown panel */}
       {open && (
-        <div
-          style={{
-            background: 'rgba(15,14,23,0.98)',
-            borderTop: '1px solid var(--border)',
-           padding: '20px 24px 28px 24px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-          }}
-        >
+        <div className="absolute top-full left-0 right-0 w-full box-border bg-[rgba(21,19,31,0.98)] border-b border-[var(--border)] px-6 pt-2 pb-6 flex flex-col gap-1 md:hidden">
           {links.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={() => setOpen(false)}
-              style={{ color: 'var(--muted)', fontSize: '14px', fontWeight: '500', textDecoration: 'none', padding: '4px 0' }}
+              className="block text-[var(--muted)] text-[15px] font-medium no-underline py-3 border-b border-[var(--border)]"
             >
               {link.label}
             </a>
@@ -149,32 +87,12 @@ export default function Nav() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            style={{
-              background: 'var(--accent)',
-              color: 'var(--bg)',
-              padding: '10px 20px',
-              borderRadius: '999px',
-              fontSize: '13px',
-              fontWeight: '700',
-              textDecoration: 'none',
-              textAlign: 'center',
-              marginTop: '8px',
-            }}
+            className="block bg-[var(--accent)] text-[var(--bg)] px-5 py-3 rounded-full text-sm font-bold no-underline text-center mt-4"
           >
             Hire Me
           </a>
         </div>
       )}
-
-      <style>{`
-        @media (min-width: 768px) {
-          .show-mobile { display: none !important; }
-        }
-        @media (max-width: 767px) {
-          .hidden-mobile { display: none !important; }
-          .show-mobile { display: block !important; }
-        }
-      `}</style>
     </nav>
   )
 }
